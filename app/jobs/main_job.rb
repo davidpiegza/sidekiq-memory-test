@@ -1,7 +1,7 @@
 class MainJob < ApplicationJob
   queue_as :default
 
-  AMOUNT_SUB_JOBS = 100_000
+  AMOUNT_SUB_JOBS = 250_000
 
   def perform
     AMOUNT_SUB_JOBS.times do |index|
