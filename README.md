@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a test project to check the memory usage of Sidekiq background jobs
+using with or without ActiveJob.
 
-Things you may want to cover:
+Apparently, using Sidekiq **without** ActiveJob reduces memory usage drastically.
 
-* Ruby version
+This a clean Rails 5.1.5 project using Ruby 2.4.3 and Sidekiq 5.1.1.
 
-* System dependencies
+It simulates a specific use case where one background job enqueues thousands of sub jobs.
 
-* Configuration
+To run the test, first start sidekiq with
 
-* Database creation
+    bundle exec sidekiq
 
-* Database initialization
+and then run the test with
 
-* How to run the test suite
+    rake sidekiq:test
 
-* Services (job queues, cache servers, search engines, etc.)
+It will enqueue 250_000 jobs by default.
 
-* Deployment instructions
+The results on my local dev environment are:
 
-* ...
+**With ActiveJob:**
+
+Memory Usage: 522 MB
+Time: 379.329 sec
+
+**Without ActiveJob**
+
+Memory Usage: 60 MB
+Time: 121.536 sec
