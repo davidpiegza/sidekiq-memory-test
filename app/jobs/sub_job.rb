@@ -1,5 +1,7 @@
-class SubJob < ApplicationJob
-  queue_as :default
+class SubJob
+  include Sidekiq::Worker
+
+  sidekiq_options queue: 'default'
 
   def perform(index)
     puts "Performing Job with index ##{index}"
